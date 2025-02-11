@@ -1,0 +1,92 @@
+<!doctype html>
+{% load static %}
+
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock title %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static "login.css" %}">
+    
+    <script src="https://kit.fontawesome.com/d8bd4da1e1.js" crossorigin="anonymous"></script>
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    </head>
+  <body>
+        <div class="container-fluid">
+            <div class="box">
+                
+                <img class="user-branco" src="static/imgs/user-branco.png" alt="">
+
+                <i class='bx bx-menu' id="btn"></i>
+            
+                <ul class="navbar-nav mr-auto">
+                    {% if user.is_authenticated %} 
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">
+                            <i class='bx bx-task'></i>
+                            <span>Tarefas</span>
+                        </a> 
+                        <span class="tools">Tarefas</span>                           
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class='bx bx-user'></i>
+                            <span>Usuarios</span>
+                        </a> 
+                        <span class="tools">Usuarios</span>                           
+                    </li>
+                    
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="accounts/login">
+                            <i class='bx bx-arrow-to-left'></i>
+                            <span>Entrar</span>
+                        </a> 
+                        <span class="tools">Entrar</span>                           
+                    </li>
+
+              
+                    {% endif %} 
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class='bx bx-cog'></i>
+                            <span>Sobre</span>
+                        </a> 
+                        <span class="tools">Sobre</span>                           
+                    </li>
+                    {% if user.is_authenticated %}
+                    <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="accounts/logout">
+                                <i class='bx bx-arrow-to-left'></i>
+                             <span><button type="submit">Sair</button></span>
+                                
+                            </a> 
+                            <span class="tools">Sair</span>                           
+                        </li>
+                    </form>
+                    {% endif %}
+
+                    <li class="no nav-item">
+                        contatos e projetos
+                    </li>
+                </ul>
+            </div>
+            
+
+
+            {% block content %}{% endblock content %}
+
+
+           
+
+        </div>
+  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>
