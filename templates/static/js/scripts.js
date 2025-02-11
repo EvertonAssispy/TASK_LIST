@@ -10,9 +10,9 @@ $(document).ready(function() {
     $(deleteBtn).on('click', function(e) {
 
         e.preventDefault();
-
+        
         var delLink = $(this).attr('href');
-        var result = confirm('quer mesmo deletar essa tarefa?');
+        var result = confirm(`Você tem certeza que deseja excluir essa tarefa?`);
 
         if(result) {
             window.location.href = delLink;

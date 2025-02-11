@@ -77,7 +77,7 @@
             <li class="task-item done">
               
           {% endif %}
-              <span><a href="/task/{{task.id}}">{{task.titulo}}</a></span>
+              <span><a href="/task/{{task.id}}" class="name">{{task.titulo}}</a></span>
               <a href="delete/{{task.id}}" class="delete-btn"><span><i class="fas fa-trash"></i></span></a>
               <a href="edit/{{task.id}}"><span><i class="fas fa-edit"></i></span></a>
               <a href="changestatus/{{task.id}}"><span><i class="fas fa-check"></i></span></a>
@@ -93,7 +93,8 @@
               <a href="?page={{ tasks.previous_page_number }}"><i class="fas fa-arrow-left"></i></a>
           {% endif %}
 
-          {% if tasks.paginator.num_pages %}
+          {% if tasks.paginator.num_pages == 1 %}
+          {% else %}
           <span class="current">
             {{ tasks.number }} de {{ tasks.paginator.num_pages }}
           </span>

@@ -15,6 +15,7 @@
     </head>
   <body>
         <div class="container-fluid">
+            {% block login.registro %}
             <div class="box">
                 
                 <img class="user-branco" src="static/imgs/user-branco.png" alt="">
@@ -26,15 +27,17 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/">
                             <i class='bx bx-task'></i>
+                        </a>    
                             <span>Tarefas</span>
-                        </a> 
+                         
                         <span class="tools">Tarefas</span>                           
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                             <i class='bx bx-user'></i>
+                        </a>    
                             <span>Usuarios</span>
-                        </a> 
+                         
                         <span class="tools">Usuarios</span>                           
                     </li>
                     
@@ -42,8 +45,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="accounts/login">
                             <i class='bx bx-arrow-to-left'></i>
+                         </a>   
                             <span>Entrar</span>
-                        </a> 
+                         
                         <span class="tools">Entrar</span>                           
                     </li>
 
@@ -52,8 +56,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                             <i class='bx bx-cog'></i>
+                        </a>    
                             <span>Sobre</span>
-                        </a> 
+                         
                         <span class="tools">Sobre</span>                           
                     </li>
                     {% if user.is_authenticated %}
@@ -62,9 +67,10 @@
                         <li class="nav-item">
                             <a class="nav-link" href="accounts/logout">
                                 <i class='bx bx-arrow-to-left'></i>
-                             <span><button type="submit">Sair</button></span>
-                                
                             </a> 
+                            <span><button type="submit">Sair</button></span>
+                                
+                             
                             <span class="tools">Sair</span>                           
                         </li>
                     </form>
@@ -81,7 +87,7 @@
             {% block content %}{% endblock content %}
 
 
-           
+           {% endblock login.registro %}
 
         </div>
   

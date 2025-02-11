@@ -50,7 +50,7 @@ def tasks(request):
         tasks_list = task.objects.all().order_by('-created_at').filter(user=request.user)
         
         '''VARIAVEL QUE RECEBE A CLASSE'''
-        paginator = Paginator(tasks_list, 9)
+        paginator = Paginator(tasks_list, 7)
         
         '''TEMOS QUE RECEBER O ARGUMENTO PAGE, ENTAO PEGAMOS COM GET
         E ASSOCIAMOS A UMA VARIAVEL, SO PRECISAMOS RESGATAR MESMO'''

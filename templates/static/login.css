@@ -8,6 +8,7 @@
 
 .container-fluid {
     min-height: 100vh;
+  
     height: 100%;
     width: 100%;
     padding: 25px 10px;
@@ -173,7 +174,7 @@ span .tools{
     transform: translate(2px, -2px);
 
 }
-.nav-item:hover .tools{
+.nav-link:hover .tools{
     text-align: center;
     opacity: 1;
     font-size: medium;
@@ -273,15 +274,14 @@ ul.messages li {
 
 .card{
     width: 400px;
+    
 }
 
 .col-md-4{
     position: relative;
-    top: 50%;
+   
     left: 50%;
 }
-
-
 
 
 
