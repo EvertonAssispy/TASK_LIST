@@ -23,6 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-@0w-3w)#*pzld6c*u5ak%kw&&l+p&gymcposi1ec1=&zxyh^hc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = os.getenv('DEBUG', 'False') == 'True'  # Converte string para booleano
+SECRET_KEY = os.getenv('SECRET_KEY', 'fallback-secret-key')
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
+
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
