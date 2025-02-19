@@ -23,4 +23,13 @@ class task(models.Model):
     
     def __str__(self):
         return self.titulo
+
+
+class myfoto(models.Model):
+    titulo = models.CharField(max_length=20)
+    foto = models.ImageField(upload_to="img") 
     
+    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.titulo

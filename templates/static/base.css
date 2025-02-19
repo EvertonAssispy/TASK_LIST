@@ -1,6 +1,7 @@
 
 
 .add-div{
+    display: flex;
     background-color: #3476e2;
     cursor: pointer;
     display: inline-block;
@@ -102,10 +103,44 @@
     display: none;
 }
 
+.form-foto{
+    transition: all 0.5s ease;
+    display: none;
+    
+}
+
+.box.open .form-foto{
+    transition: all 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+   
+}
+.nome{
+    display: none;
+}
+.box.open .nome{
+    display: flex;
+}
+
+.box.open .form-foto .addft{
+    border: none;
+    width: 130px;
+    background-color: #3476e2;
+    border-radius: 12px;
+}
+
+.box.open .form-foto .trocarft{
+    border: none;
+    width: 130px;
+    background-color: #3476e2;
+    border-radius: 12px;
+}
+
 .user-branco{
     transition: all 0.5s ease;
     position: absolute;
-    
+    border-radius: 50%;
     height: 60px;
     width: 60px;
     margin-top: 20px;
@@ -116,6 +151,12 @@
     border-top: 1px solid var(--texto);
     transition: all 0.6s ease-out;
     opacity: 1;
+}
+
+.user-branco .down{
+    height: 50px;
+    width: 50px;
+
 }
 
 

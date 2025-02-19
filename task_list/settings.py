@@ -27,7 +27,7 @@ DEBUG = os.getenv('DEBUG', 'False') == 'True'  # Converte string para booleano
 SECRET_KEY = os.getenv('SECRET_KEY', 'fallback-secret-key')
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -133,6 +133,7 @@ if not DEBUG:
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
     
     '''media configuracoes'''
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 

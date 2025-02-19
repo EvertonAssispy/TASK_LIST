@@ -10,8 +10,8 @@ urlpatterns = [
     path('edit/<int:id>', views.edittask, name='edittask'),
     path('changestatus/<int:id>', views.changestatus, name='changestatus'),
     path('delete/<int:id>', views.deletetask, name='deletetask'),
+    path('deleteft/<int:id>',views.deleteFt, name='delete-foto'),
 ]
 
 
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,13 +1,15 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import task
+from PIL import Image
+from .models import task, myfoto
 from .forms import Taskform
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
-from django.contrib.auth import login as login_django
-
+from django.contrib.auth import get_user_model
+from django.contrib.auth import login as login_django, logout
+from django.http import HttpResponse
 import datetime
 
 
@@ -19,6 +21,9 @@ import datetime
 
 @login_required
 def tasks(request):
+    
+    
+    
     '''pesquisa'''
     search = request.GET.get('search')
     
@@ -32,6 +37,9 @@ def tasks(request):
     tasksdone = task.objects.filter(done='done',user=request.user).count()
     
     tasksdoing = task.objects.filter(done='doing',user=request.user).count()
+    
+    tasks = task.objects.filter(user=request.user).order_by('-created_at')
+    
     if search:
         '''usando o filter para literalmente filtrar os objetos do banco de acordo
         com os argumentos passados, usando USER igual ao user request que é o usuario ja autenticado.'''
@@ -44,7 +52,25 @@ def tasks(request):
         tasks = task.objects.filter(done=filter, user=request.user)
     
         return render(request, 'tarefas.html', {'tasks': tasks, 'user':usuario})
+    
+    if request.method == 'POST':
         
+        usuario = request.user
+        file = request.FILES.get("myfile")
+        
+        if file:  # se file existe...
+            
+            if hasattr(usuario, 'myfoto'):   # se ha foto ja salva em um usuario, apague a foto e continue...
+                usuario.myfoto.delete()
+
+            
+            my = myfoto(titulo=file.name, foto=file, user=usuario)
+            my.save()
+           
+        tasks = task.objects.filter(user=request.user).order_by('-created_at')
+
+        
+        return render(request, 'tarefas.html', {'tasks': tasks, 'tasksrecently':taskdonerecently,'tasksdone':tasksdone,'tasksdoing':tasksdoing, 'foto':my})
         
     else:
         tasks_list = task.objects.all().order_by('-created_at').filter(user=request.user)
@@ -59,9 +85,13 @@ def tasks(request):
         '''PEGANDO A PAGINA ORIGINAL'''
         tasks = paginator.get_page(page)
         
+        usuario = request.user
         
-        return render(request, 'tarefas.html', {'tasks': tasks, 'tasksrecently':taskdonerecently,'tasksdone':tasksdone,'tasksdoing':tasksdoing})
-
+        return render(request, 'tarefas.html', {'tasks': tasks, 'tasksrecently':taskdonerecently,'tasksdone':tasksdone,'tasksdoing':tasksdoing, 'user':usuario})
+    
+    return HttpResponse(status=400)
+    
+    
 @login_required
 def taskviews(request, id):
     tarefa = get_object_or_404(task, pk=id)
@@ -139,5 +169,15 @@ def changestatus(request, id):
         tarefa.done = 'doing'
     
     tarefa.save()
+    
+    return redirect('/')
+
+
+
+@login_required
+def deleteFt(reqeust,id):
+    foto = get_object_or_404(myfoto, pk=id)
+    
+    foto.delete()
     
     return redirect('/')
